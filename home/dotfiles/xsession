@@ -1,0 +1,10 @@
+#!/bin/sh
+
+export XSECURELOCK_FONT="Sans-24"
+export XSECURELOCK_AUTH_BACKGROUND_COLOR="#000000"
+export XSECURELOCK_AUTH_FOREGROUND_COLOR="#FFFFFF"
+export XSECURELOCK_SHOW_DATETIME=1
+export XSECURELOCK_SHOW_USERNAME=1
+
+xautolock -detectsleep -time 5 -locker "xsecurelock" &
+exec spectrwm

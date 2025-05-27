@@ -1,0 +1,9 @@
+xterm*faceName: MesloLGS NF
+xterm*faceSize: 14
+!xterm*background: black
+!xterm*foreground: white
+*.termName: xterm-256color
+*.background:   #e1e2e7
+*.foreground:   #3760bf
+*.cursorColor:  #3760bf
+Xft.dpi: 96

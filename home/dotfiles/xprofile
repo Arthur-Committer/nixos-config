@@ -1,0 +1,18 @@
+
+# ~/.xprofile
+
+# 1) Start D-Bus session early, so any GTK/Qt/applet finds $DBUS_SESSION_BUS_ADDRESS
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+  eval "$(dbus-launch --exit-with-session --sh-syntax)"
+fi
+
+# 2) Load Xresources
+xrdb -merge ~/.Xresources &
+
+# 3) Set wallpaper
+feh --bg-fill ~/images/wallpapers/R2-D2.jpg &
+
+# 4) Export additional PATH entries
+export PATH=$PATH:/run/current-system/sw/bin
+
+picom --config ~/.config/picom/picom.conf -b
