@@ -70,7 +70,7 @@
     ".xprofile".source =                ./dotfiles/xprofile;
     ".xsession".source =                ./dotfiles/xsession;
     ".spectrwm.conf".source =           ./dotfiles/spectrwm.conf;
-    ".gitconfig".source =               ./dotfiles/gitconfig;
+    #".gitconfig".source =               ./dotfiles/gitconfig;
     ".p10k.zsh".source =                ./dotfiles/p10k.zsh;
     ".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
     ".zshrc.d".source        =          ./dotfiles/zshrc.d;
