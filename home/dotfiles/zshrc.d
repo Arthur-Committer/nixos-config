@@ -30,6 +30,8 @@
 bindkey '^P' autosuggest-accept
 
 alias cdp="cd ~/documents/programs/"
+alias cdpp="cd ~/documents/programs/code_scraps/python/"
+alias cdpr="cd ~/documents/programs/code_scraps/rust/"
 alias cicle="cd ~/documents/programs/python/cicle/ && python3 ~/documents/programs/python/cicle/main.py && cd ~"
 alias snvim='f() { nvim "suda://$1"; }; f'
 alias icat="kitty +kitten icat"

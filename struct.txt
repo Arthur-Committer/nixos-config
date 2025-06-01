@@ -1,6 +1,7 @@
 .:
 configuration.nix
 error.txt
+erros3.txt
 flake.lock
 flake.nix
 hardware-configuration.nix
@@ -13,6 +14,7 @@ error.txt
 home.nix
 
 ./home/dotfiles:
+firmware
 gitconfig
 kitty.conf
 p10k.zsh
@@ -21,3 +23,11 @@ xprofile
 Xresources
 xsession
 zshrc.d
+
+./home/dotfiles/firmware:
+mediatek
+
+./home/dotfiles/firmware/mediatek:
+BT_RAM_CODE_MT7961_1_2_hdr.bin
+WIFI_MT7961_patch_mcu_1_2_hdr.bin
+WIFI_RAM_CODE_MT7961_1.bin

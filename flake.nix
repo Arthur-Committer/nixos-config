@@ -17,7 +17,14 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./configuration.nix
-
+          ({ config, pkgs, ... }: {
+            hardware.firmware = [
+              (pkgs.runCommandNoCC "mt7961-firmware" { } ''
+                mkdir -p $out/lib/firmware/mediatek
+                cp ${self}/home/dotfiles/firmware/mediatek/* $out/lib/firmware/mediatek/
+              '')
+            ];
+          })
           # Aqui vem o módulo do Home Manager (injetado via inputs)
           home-manager.nixosModules.home-manager
           {

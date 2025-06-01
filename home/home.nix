@@ -5,28 +5,26 @@
   home.homeDirectory = "/home/arthur";
 
   home.stateVersion = "24.11";
+   
+  
 
   home.packages = with pkgs; [
-    neovim
-    lua
-    nodejs
-    yarn
-    python3
-    python3Packages.pip
-    python3Packages.black
-    python3Packages.ruff
-    python3Packages.debugpy
-    pyright
-    rustc
-    cargo
-    clippy
-    rustfmt
-    lldb
-    rust-analyzer
-
-    # Ferramentas pessoais
-    zsh
-    zsh-powerlevel10k
+    #extras astronvim
+    lazygit bottom nodejs
+    #terminal and visuals
+    kitty picom feh btop speedtest-cli
+    #nvim
+    neovim lua nodejs yarn
+    #python
+    python3 #python3Packages.pip python3Packages.black 
+    #python3Packages.ruff python3Packages.debugpy pyright
+    #python3Packages.pillow
+    #rust
+    rustc cargo #clippy rustfmt rust-analyzer #lldb
+    #terminal
+    zsh zsh-powerlevel10k
+    #apps deluge = torrent client
+    deluge firefox
   ];
 
   programs.zsh = {
@@ -65,6 +63,19 @@
     fi
   '';
 };
+  programs.fastfetch = {
+    enable = true;
+    settings = {
+      display = {
+        separator = "─";
+      };
+      modules = [
+        "title" "os" "kernel" "uptime" "packages"
+        "shell" "terminal" "cpu" "memory" "gpu"
+        "colors"
+      ];
+    };
+  };
   programs.git.enable = true;
   home.file = {
     ".xprofile".source =                ./dotfiles/xprofile;
