@@ -1,17 +1,75 @@
-# configuration.nix
+# configuration.nix 
 { config, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    # NÃO colocar aqui `inputs.home-manager.nixosModules.default`
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  # Desativar IPv6 globalmente para reduzir latência e evitar problemas com provedores que não oferecem suporte adequado
+  networking.enableIPv6 = false;
+  boot.kernel.sysctl."net.ipv6.conf.all.disable_ipv6" = true;
+  boot.kernel.sysctl."net.ipv6.conf.default.disable_ipv6" = true;
 
+  # Configuração de rede
   networking.hostName = "R2-D2";
+
+  # Habilitar NetworkManager para gerenciamento de conexões
   networking.networkmanager.enable = true;
+
+  # Utilizar systemd-resolved para resolução de DNS mais eficiente
+  networking.networkmanager.dns = "systemd-resolved";
+  services.resolved.enable = true;
+
+  
+  networking = {
+    wireless.iwd.enable = true;
+    wireless.iwd.settings = {
+      General = {
+        EnableNetworkConfiguration = true;
+      };
+      Settings = {
+        AutoConnect = true;
+      };
+    };
+  };
+  # Habilitar iwd (iNet wireless daemon) para melhor desempenho em conexões Wi-Fi
+  
+  
+  hardware.pulseaudio.enable = false;
+  # Habilitar PipeWire com suporte a ALSA e PulseAudio
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # jack.enable = true;  # Descomente se precisar de suporte a JACK
+  };
+
+  # Habilitar suporte a Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  # Configuração adicional para codecs Bluetooth de alta qualidade
+  services.pipewire.wireplumber.extraConfig = {
+    "bluetooth-enhancements" = {
+      "monitor.bluez.properties" = {
+        "bluez5.enable-sbc-xq" = true;
+        "bluez5.enable-msbc" = true;
+        "bluez5.enable-hw-volume" = true;
+        "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+      };
+    };
+  };
+
+  
 
   nix = {
     package = pkgs.nix;
@@ -82,14 +140,12 @@
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    kitty picom feh btop slock rofi
-    zsh zsh-powerlevel10k networkmanager xsel
-    firefox xsecurelock xautolock
-    neovim lua git curl wget ripgrep fd unzip gnutar
-    nodejs yarn
-    python3 python3Packages.pip python3Packages.black python3Packages.ruff python3Packages.debugpy
-    pyright
-    rustc cargo clippy rustfmt lldb rust-analyzer gcc
+    usbutils slock rofi
+    networkmanager xsel
+    xsecurelock xautolock
+    git curl wget ripgrep fd unzip gnutar
+    gcc
+    bluez pamixer
   ];
 
   services.xserver.excludePackages = with pkgs; [ xterm ];
@@ -100,10 +156,10 @@
 
   nix.gc = {
     automatic = true;
-    dates     = "monthly";
-    options   = "--delete-older-than 30d";
+    dates     = "weekly";
+    options   = "--delete-older-than 14d";
   };
 
-  system.stateVersion = "24.11";
+  #system.stateVersion = "24.11";
 }
  

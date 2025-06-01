@@ -1,0 +1,9 @@
+○ mpris-proxy.service - MPRIS Proxy
+     Loaded: bad-setting (Reason: Unit mpris-proxy.service has a bad unit file setting.)
+    Drop-In: /nix/store/0k0gbx1gyx41987iqarr94i9zdr6ln29-user-units/mpris-proxy.service.d
+             └─overrides.conf
+     Active: inactive (dead)
+       Docs: man:mpris-proxy(1)
+
+mai 27 21:01:03 R2-D2 systemd[1148]: mpris-proxy.service: Service has more than one ExecStart= setting, which is only allowed for Type=oneshot services. Refusing.
+mai 27 21:01:04 R2-D2 systemd[1148]: mpris-proxy.service: Service has more than one ExecStart= setting, which is only allowed for Type=oneshot services. Refusing.
